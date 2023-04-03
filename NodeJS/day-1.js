@@ -13,3 +13,8 @@ fileSystem.writeFileSync(`hello.txt`, `Hello World! \nwrote this file using Node
 
 const fileContent = fileSystem.readFileSync(`./hello.txt`);
 console.log(fileContent.toLocaleString());
+
+const http = require("http");
+// CJS common JS syntax -> old JS syntax.
+// EJS ES6 JS syntax also there. -> import export etc.
+// read on modules and imports

@@ -1,13 +1,16 @@
-var lol = "lol";
+lol = "lol";
 var x = 2;
-var y = 3;
-var z = 5; //declare and initialize a variable
+var y = 'Kunal';
+var z = true; //declare and initialize a variable
 console.log(x, y, z);
+
 var a;  //declare a variable in JS
 a = 10;  //initialize the variable
+
 console.log(a);
 console.log(typeof (lol));
 console.log(typeof (a));
+
 var flag = true;
 console.log(typeof (flag));
 

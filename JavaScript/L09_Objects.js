@@ -1,0 +1,95 @@
+// Create an object
+
+
+let diary = {};
+diary['a'] = 1;
+console.log(diary);
+
+for (var k in diary) {
+    console.log(k, " ", diary[k]);
+}
+
+var data = {
+    name: "Tadka",
+    grade: "VI",
+    section: "A",
+    marks: {
+        maths: 55,
+        science: 65,
+        english: 70
+    }
+};
+
+console.log(data.marks);
+console.log(data.marks.maths);
+console.log(data.marks.english);
+
+console.log(data["marks"]["maths"]);
+
+
+var user = {
+    name: "Ram",
+    age: 34,
+    hobbies: ["coding", "reading"],
+    print: function () {
+        console.log("Hello " + this.name);
+        console.log("Age is " + this.age);
+        console.log("Hobbies are " + this.hobbies.join());
+    }
+}
+
+user.print();
+// OUTPUT
+// Hello ram
+// age is 34
+// my hobbies are coding,running
+
+
+const myObj = {
+    name: "Kunal",
+    age: 25,
+    greet: () => {
+        // for anonymous functions this points to the parent scope
+        // undefined as this here points to global node runtime scope
+        return "Hi, my name is " + this.name;
+    }
+};
+console.log(this);
+console.log(" -> points to global node runtime scope.");
+console.log(myObj.greet());
+
+const myObj1 = {
+    name: "Kunal",
+    age: 25,
+    greet: function () {
+        return "Hi, my name is " + this.name;
+    }
+};
+
+console.log(myObj1.greet());
+
+const myObj2 = {
+    name: "Kunal",
+    age: 25,
+    greet() {
+        // syntax for object functions
+        return "Hi, my name is " + this.name;
+    }
+};
+
+console.log(myObj2.greet());
+
+const arr = ['kunal', 'rohit', 'shayam'];
+// array is a reference type 
+// variable arr only stores the 1st element's address in memory.
+console.log(arr);
+
+// even if you change the array its pointing to...
+arr.push('pramod');
+
+// the reference has not changed so it does not matter.
+console.log(arr);
+
+// below is not allowed as you cannot reassign a const variable.
+// arr = ['batman', 'robin', 'joker'];
+console.log(arr);

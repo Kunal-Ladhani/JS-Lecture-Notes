@@ -42,3 +42,17 @@ normalFunction();
 // After ES6 -> Promises were introduced. better way to do Async.
 
 // ES7 - async await -> promise under the hood. still better syntax.
+// TODO: LEARN EVERYTHING ON ASYNC JS.
+// TODO: Learn how to use debugger in JS and TS.
+let sum = (a, b) => {
+    return a + b;
+}
+
+let printer = (fun, a, b) => {
+    console.log(fun(a, b));
+}
+
+console.log(`sum is: `);
+setTimeout(() => {
+    printer(sum, 3, 5);
+}, 2000);

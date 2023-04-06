@@ -1,6 +1,6 @@
 /* Modules */
 
-// Nodejs has some builtin modules.
+// Nodejs has some builtin modules (extra APIs provided)
 // fs - to work with files
 // http - make http requests
 // os- to work with os

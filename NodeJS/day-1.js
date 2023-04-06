@@ -1,6 +1,13 @@
 // Node.js is basically a JS runtime environment
 // it contains V8 engine inside it to run JS + some other functionalities
 
+// JS is -
+// single threaded
+// event driven
+// concurrent
+// multi paradigm - OOP, FP
+// TODO: READ ON NODE JS ARCHITECHTURE
+
 // helps us write server side code
 // the transpiter had V8 engine embededed in it (written in C++)
 // transpiles the JS code to machine code that can run on machine.

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/shop');
+const landingRoutes = require('./routes/landing');
 
 const express = require('express');
 
@@ -47,12 +48,7 @@ app.use((req, res, next) => {
 
 app.use(userRoutes);
 app.use(adminRoutes);
-
-app.use('/', (req, res, next) => {
-    console.log("I am root path middleware, I always run.", req.originalUrl);
-    res.send(`<h1>hello from root path.</h1>`);
-    // next();
-});
+app.use(landingRoutes);
 
 // const server = http.createServer(app);
 // server.listen(3000);

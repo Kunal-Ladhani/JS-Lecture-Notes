@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+
 const path = require('path');
 
 const connectDB = require('./server/database/connection');
@@ -26,7 +27,9 @@ app.use(morgan('tiny'));
 connectDB();
 
 // PARSE REQUESTS TO body-parser
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // SET VIEW ENGINE
 // other - pug or html
@@ -44,5 +47,11 @@ app.use('/', routes);
 app.get('/', (req, res, next) => {
     res.send('CRUD App Started...');
 });
+
+// FOR TESTING
+// app.use('/:id', (req, res, next) => {
+//     console.log(req.body);
+//     res.send(`request from id = ${req.params.id}`);
+// });
 
 app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`));

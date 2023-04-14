@@ -23,10 +23,9 @@ route.get('/add-user', services.addUser);
 route.get('/update-user', services.updateUser);
 
 // CRUD API
-route.get('/api/user', controller.findUser);
-route.post('/api/user', controller.createUser);
-route.put('/api/user:id', controller.updateUser);
-route.delete('/api/user:id', controller.deleteUser);
-
+route.get('/api/users', controller.findUser);
+route.post('/api/users', controller.createUser);
+route.put('/api/users/:id', controller.updateUser);
+route.delete('/api/users/:id', controller.deleteUser);
 
 module.exports = route;

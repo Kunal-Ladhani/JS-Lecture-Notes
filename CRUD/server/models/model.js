@@ -1,8 +1,7 @@
-// mongoDB scheme here
-
 const mongoose = require('mongoose');
 
-let schema = new mongoose.Schema({
+// mongoDB schema is defined here
+let userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -16,5 +15,5 @@ let schema = new mongoose.Schema({
     status: String
 });
 
-const userDB = mongoose.model('userdb', schema);
+const userDB = mongoose.model('userdb', userSchema);
 module.exports = userDB;

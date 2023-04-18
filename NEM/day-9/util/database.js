@@ -18,24 +18,25 @@ const MongoClient = mongodb.MongoClient;
 
 let _db;
 
-const mongoConnect = (callback) => {
-    MongoClient.connect('mongodb+srv://admin:admin123@omegacluster.u8d7bop.mongodb.net/?retryWrites=true&w=majority')
-        .then((client) => {
-            console.log("Connected...");
-            _db = client.db();
-            callback(client);
-        }).catch((err) => {
-            console.error(err);
-            throw err;
-        });
-};
+const mongoConnect = callbackFunction => {
+  MongoClient.connect(process.env.MONGO_URI, { useUnifiedTopology: true })
+    .then(client => {
+      console.log(`Connected to MongoDB...`);
+      _db = client.db();
+      callbackFunction();
+    })
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
+}
 
 const getDB = () => {
-    if (_db) {
-        return _db;
-    }
-    throw 'NO DB FOUND';
-}
+  if (_db) {
+    return _db;
+  }
+  throw 'No database found!';
+};
 
 exports.mongoConnect = mongoConnect;
 exports.getDB = getDB;

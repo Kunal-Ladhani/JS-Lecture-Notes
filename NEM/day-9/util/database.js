@@ -1,42 +1,24 @@
-// const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-// const sequelize = new Sequelize('node-complete', 'root', 'nodecomplete', {
-//   dialect: 'mysql',
-//   host: 'localhost'
-// });
 
-// module.exports = sequelize;
-
-// we will now use mongodb here, no-sql database so we can have db with no schema
-// schema == rigid structure
-
-// relations are made in 2 ways - embed one document inside the parent document
-// or embed just the reference of child document inside the parent document.
-
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
-
-let _db;
-
-const mongoConnect = callbackFunction => {
-  MongoClient.connect(process.env.MONGO_URI, { useUnifiedTopology: true })
-    .then(client => {
-      console.log(`Connected to MongoDB...`);
-      _db = client.db();
-      callbackFunction();
-    })
-    .catch(err => {
-      console.error(err);
-      throw err;
+// make mongodb connection here
+const connectDB = async () => {
+  try {
+    // mongoDB connection string is passed to this function
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      // useUnifiedTopology: true,  // default setting = true    
+      // useFindAndModify: true,    // default setting = false
+      // useNewUrlParser: true,     // default setting = true
+      // useCreateIndex: true       // default setting = true
     });
-}
 
-const getDB = () => {
-  if (_db) {
-    return _db;
+    console.log(`mongoDB connected: ${conn.connection.host}`);
+
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
   }
-  throw 'No database found!';
 };
 
-exports.mongoConnect = mongoConnect;
-exports.getDB = getDB;
+module.exports = connectDB;

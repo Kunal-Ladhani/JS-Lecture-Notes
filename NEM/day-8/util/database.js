@@ -7,12 +7,18 @@
 
 // module.exports = sequelize;
 
-// we will now use mongodb here, no-sql database so we can have db with no schema
-// schema == rigid structure
-
-// relations are made in 2 ways - embed one document inside the parent document
-// or embed just the reference of child document inside the parent document.
-
+/** 
+ * we will now use mongodb here, A no-sql database.
+ * so we can have db with no schema
+ * schema ==> rigid structure
+ * 
+ * relations are made in 2 ways - 
+ * embed one document inside the parent document
+ * or embed just the reference of child document inside the parent document.
+ * 
+ * we will use mongoDB driver to manage connections and queries here
+ * later we will use mongoose.
+ */
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 

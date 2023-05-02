@@ -1,227 +1,90 @@
-// const Sequelize = require('sequelize');
-
-// const sequelize = require('../util/database');
-
-// const User = sequelize.define('user', {
-//   id: {
-//     type: Sequelize.INTEGER,
-//     autoIncrement: true,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   name: Sequelize.STRING,
-//   email: Sequelize.STRING
-// });
-
 const mongodb = require('mongodb');
-const getDB = require('../util/database').getDB;
+
+const mongoose = require('mongoose');
 
 const ObjectId = mongodb.ObjectId;
 
-class User {
-  constructor(name, email, userId, cart) {
-    this.name = name;
-    this.email = email;
-    this._id = userId ? new ObjectId(userId) : null;
-    this.cart = cart;
+const schema = mongoose.Schema;
+
+const userSchema = new schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  cart: {
+    // items is an array of embedded documents.
+    items: [
+      {
+        productId: {
+          type: schema.Types.ObjectId,
+          ref: 'Product',
+          required: true
+        },
+        quantity: { type: Number, required: true }
+      }
+    ]
   }
+});
 
-  save() {
-    const db = getDB();
-    let dbOps;
+userSchema.methods.dummyFunction = function () {
+  // console.log("---------------------------------------");
+  // console.log("this here is ->");
+  // console.log(this);
+  // console.log("---------------------------------------");
 
-    if (this._id) {
-      // update existing user
-      dbOps = db.collection('users')
-        .updateOne({ _id: this._id }, { $set: this });
-    } else {
-      // create new user in db
-      dbOps = db.collection('users')
-        .insertOne(this);
-    }
-    return dbOps.then((result) => {
-      console.log(result);
-    }).catch((err) => {
-      console.error(err);
+  // if we write function using function keyword (ES5 way)
+  // this keyword will refer to the object calling the function.
+  // means the user object that wanted to getCart().
+
+  // if we write function using arrow function (ES6 way)
+  // this keyword will refer to the object calling the function.
+  // which is NOT NECESSARILY the user object that wanted to getCart().
+  // might be refering to its parent.
+};
+
+userSchema.methods.addToCart = function (product) {
+  // -1 if does prod does not exist in cart
+  // else index of that product in cart items array
+  const cartProductIdx = this.cart.items.findIndex(cartProd => {
+    return cartProd.productId.toString() === product._id.toString();
+  });
+
+  const updatedCartItems = [...this.cart.items];
+  let newQuantity = 1;
+
+  if (cartProductIdx >= 0) {
+    // product exists in cart
+    newQuantity = this.cart.items[cartProductIdx].quantity + 1;
+    updatedCartItems[cartProductIdx].quantity = newQuantity;
+  } else {
+    updatedCartItems.push({
+      productId: new ObjectId(product._id),
+      quantity: newQuantity
     });
   }
 
-  static fetchAll() {
-    const db = getDB();
+  this.cart = { items: updatedCartItems };
 
-    return db.collection('users')
-      .find()
-      .toArray()
-      .then(result => console.log(result))
-      .catch(err => console.error(err));
-  }
+  return this.save();
+};
 
-  static findById(userId) {
-    const db = getDB();
-    const objectId = new ObjectId(userId);
+userSchema.methods.deleteProductFromCart = function (productId) {
+  const updatedCartItems = this.cart.items.filter(item => {
+    return item.productId.toString() !== productId.toString();
+  });
 
-    return db.collection('users')
-      .findOne({ _id: objectId })
-      .then(user => {
-        console.log(user);
-        return user;
-      })
-      .catch(err => console.error(err));
-  }
+  this.cart.items = updatedCartItems;
 
-  static deleteById(userId) {
-    const db = getDB();
-    const objectId = new ObjectId(userId);
+  return this.save();
+};
 
-    return db.collection('users')
-      .deleteOne({ _id: objectId })
-      .then(result => {
-        console.log("DELETED THE USER");
-        console.log(result);
-      })
-      .catch(err => console.error(err));
-  }
-
-  addToCart(product) {
-    const db = getDB();
-
-    // -1 if does prod does not exist in cart
-    // else index of that product in cart items array
-    const cartProductIdx = this.cart.items.findIndex(cartProd => {
-      return cartProd.productId.toString() === product._id.toString();
-    });
-
-    const updatedCartItems = [...this.cart.items];
-    let newQuantity = 1;
-
-    if (cartProductIdx >= 0) {
-      // product exists in cart
-      newQuantity = this.cart.items[cartProductIdx].quantity + 1;
-      updatedCartItems[cartProductIdx].quantity = newQuantity;
-    } else {
-      updatedCartItems.push({
-        productId: ObjectId(product._id),
-        quantity: newQuantity
-      });
-    }
-
-    const updatedCart = {
-      items: updatedCartItems
-      // items: [{
-      //   productId: product._id,
-      //   quantity: 1
-      // }]
-    };
-
-    return db.collection('users')
-      .updateOne(
-        { _id: new ObjectId(this._id) },
-        { $set: { cart: updatedCart } }
-      );
-  }
-
-  getCart() {
-    // return this.cart;
-    const db = getDB();
-
-    const prodIds = this.cart.items.map(prod => {
-      return prod.productId;
-    });
-
-    return db.collection('products')
-      .find({ _id: { $in: prodIds } })
-      .toArray()
-      .then(products => {
-        return products.map(prod => {
-          return {
-            ...prod,
-            quantity: this.cart.items.find(item => {
-              return item.productId.toString() === prod._id.toString();
-            }).quantity
-          };
-        });
-      });
-  }
-
-  deleteProductFromCart(productId) {
-    const updatedCartItems = this.cart.items.filter(item => {
-      return item.productId.toString() !== productId.toString();
-    });
-
-    const db = getDB();
-
-    return db.collection('users')
-      .updateOne(
-        { _id: ObjectId(this._id) },
-        { $set: { cart: { items: updatedCartItems } } }
-      );
-  }
-
-  addOrder() {
-    const db = getDB();
-
-    return this.getCart()
-      .then(products => {
-        let totalAmount = 0;
-        let totalQuantity = 0;
-
-        products.forEach(product => {
-          totalAmount += parseInt(product.price);
-          totalQuantity += parseInt(product.quantity);
-        });
-
-        return db.collection('orders').insertOne({
-          userId: ObjectId(this._id),
-          products: products,
-          quantity: totalQuantity,
-          price: totalAmount
-        });
-      })
-      .then(result => {
-        this.cart = { items: [] };
-        return db
-          .collection('users')
-          .updateOne(
-            { _id: new ObjectId(this._id) },
-            { $set: { cart: { items: [] } } }
-          );
-      })
-      .catch(err => console.error(err));
-  }
-
-  getOrders() {
-    const db = getDB();
-
-    return db
-      .collection('orders')
-      .find({ userId: new ObjectId(this._id) })
-      .toArray();
-  }
+userSchema.methods.clearCart = function () {
+  this.cart = { items: [] };
+  return this.save();
 }
 
-module.exports = User;
-
-/**
- * like sequelize(ORM) for SQL db(Relational DB), we have mongoose
- * ORM - Object Relational Mapping
- * it enables us to work with data rather than focusing our efforts on writing querys.
- * 
- * mongoose is ODM Library for MongoDB.
- *  ODM - Object Document Mapping
- * 
- * MongoDB - document database so we have a ODM.
- * 
- * we a object here in JS
- * we want to map it to a document and save it in a collection.
- * we can write queries for that like we did in day 7 on our own
- * but we want to focus on object or data and want to work with it
- * rather than wasting our time writing complex queries
- * 
- * allow us to define schema and models - what data should look like
- * we then make instances - real JS object based off these models(blueprints)
- * we can now write queries
- * we use objects and models to query the DB
- * we use mongoose which adds syntactical sugar to make our work easier!
- * 
- */
-
+module.exports = mongoose.model('User', userSchema);

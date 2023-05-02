@@ -57,14 +57,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-
-
-
-// adding the user manually
+// adding the user 
 app.use((req, res, next) => {
-  User.findById("643ce6fac22a9059b9cede89")
+  User.findById("6448fedd29b0edce9f9ef791")
     .then(user => {
-      req.user = new User(user.name, user.email, user._id, user.cart);
+      req.user = user;
       next();
     })
     .catch(err => console.log(err));
@@ -80,6 +77,24 @@ app.use(errorController.get404);
 // connect to db.
 connectDB()
   .then(result => {
+    // setting up a user if it does not exist already.
+    User
+      .findOne()
+      .then(user => {
+        if (!user) {
+          const newUser = new User({
+            name: "Kunal",
+            email: "kunal.ladhani@goniyo.com",
+            cart: {
+              items: []
+            }
+          });
+          newUser.save();
+        }
+      })
+      .catch(err => console.error(err));
+
+
     // setting up server.
     app.listen(PORT, HOSTNAME, () => {
       console.log(`Listening on port number : ${PORT}`);

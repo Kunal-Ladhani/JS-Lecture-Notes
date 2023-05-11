@@ -511,6 +511,7 @@ function reject(message: string): never {
 }
 // this function will never return, will always throws exception
 
+// constantly watches a message queue for events.
 function processEvents(): never {
     while (true) {
         // read a Message From Queue
@@ -531,3 +532,7 @@ function processEvents(): never {
 // console.log("hello");
 // compilation error saying that code will never reach here.
 // will never get executed as the above function never returns.
+
+
+console.log("---------------------------OOP--------------------------------");
+

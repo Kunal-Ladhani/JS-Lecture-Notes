@@ -62,11 +62,12 @@ const promise3 = new Promise((resolve, reject) => {
 const promise4 = 10;
 
 const promise5 = fetch('https://fakestoreapi.com/products')
-    .then(res => res.json());
+    .then(res => res.json())
+    .catch(err => console.error(err));
 
 Promise.all([promise1, promise2, promise3, promise4, promise5]).then(value => console.log(value));
 
-// async await
+// async await way
 
 const getProducts = async () => {
     const res = await fetch('https://fakestoreapi.com/products');

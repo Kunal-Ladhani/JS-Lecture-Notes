@@ -13,8 +13,9 @@ var q = 3, r;
 // see, we have put undeclared m first!
 console.log(m, p, q, r);
 
-/** 
- * JS has 8 datatypes -
+/* NOTE: JS has 8 datatypes -
+ * 
+ * VALUE TYPES / PRIMITIVE DATA TYPES =>
  * 
  * String
  * Number
@@ -22,12 +23,24 @@ console.log(m, p, q, r);
  * Symbol
  * null
  * undefined
- * object
- */
+ * 
+ * NOTE: primitives are copied by value
+ * 
+ * REFERENCE TYPES / NON-PRIMITIVE DATA TYPES =>
+ * 
+ * Object
+ * Function - object only
+ * Array - object only
+ * 
+ * NOTE : objects are copied by reference
+ * 
+ * */
 
 
-// OBJECTS
-// all below 3 are objects = object, array, date
+/* NOTE : OBJECTS
+ * all below 3 are objects = object, array, date
+ * */
+
 var myObj = {
     firstname: "Kunal",
     lastname: "Ladhani"
@@ -60,8 +73,8 @@ LOLstring = "Kunal is a comic fellow!";
 console.log(typeof LOLstring);
 console.log(LOLstring);
 
-/**
- * Number
+/*
+ * NOTE: Number
  * Most programming languages have many number types:
  * 
  * Whole numbers (integers):
@@ -72,7 +85,7 @@ console.log(LOLstring);
  * 
  * Javascript numbers are always one type:
  * double (64-bit floating point).
- */
+ * */
 var num1 = 2, num2 = -11, num3 = 12.6, num4 = 10e9 + 7, num5 = 10e-6;
 console.log("variable num1 = " + num1 + " and its type = " + typeof num1);
 console.log("variable num2 = " + num2 + " and its type = " + typeof num2);
@@ -94,3 +107,4 @@ console.log(largeNum);
 var foo = Symbol("foo");
 console.log(typeof foo);
 console.log(foo);
+

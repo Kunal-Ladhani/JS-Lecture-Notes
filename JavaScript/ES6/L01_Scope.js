@@ -1,12 +1,10 @@
-console.log("------------------------------------------------------");
-// NOTHING
+console.log("------------------------NO KEYWORD------------------------------");
 
 // console.log(x);  // reference error - x is not defined
 x = 50;
 console.log(x);
 
-console.log("------------------------------------------------------");
-// var keyword
+console.log("------------------------VAR KEYWORD------------------------------");
 
 // var -> global or functional scope
 // var -> globally declared -> global scope
@@ -33,8 +31,7 @@ ab();
 
 // console.log(f) // refrence error - f not defined
 
-console.log("------------------------------------------------------");
-// let keyword
+console.log("------------------------LET KEYWORD------------------------------");
 
 // let -> block scope -> can't be accessed outside that block
 // let -> cannot redeclare the variable in the same scope
@@ -83,8 +80,8 @@ myFun();
 // console.log(d);    // ReferenceError: d is not defined
 
 
-console.log("------------------------------------------------------");
-// const keyword
+console.log("-------------------------CONST KEYWORD----------------------------");
+
 
 // const-> block scope -> can't be accessed outside that block
 // const -> cannot redeclare the variable in the same scope

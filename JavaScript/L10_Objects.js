@@ -45,6 +45,24 @@ const property = 'Fav City';
 user[property] = 'bhopal';
 
 console.log(user);
+console.log(Object.isExtensible(user));
+console.log(Object.isFrozen(user));
+console.log(Object.isSealed(user));
+
+Object.freeze(user);
+
+user.favFood = 'Poha';
+console.log(user);	// see the property did not get added to user object.
+/* 
+ * Object.freeze() will - 
+ * 
+ * 1. Prevents the modification of existing property attributes and values, 
+ * 2. prevents the addition of new properties.
+ * 
+ * */
+console.log(Object.isExtensible(user));
+console.log(Object.isFrozen(user));
+console.log(Object.isSealed(user));
 
 
 // NOTE: Iterating through properties in an object.

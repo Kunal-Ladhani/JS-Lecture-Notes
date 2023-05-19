@@ -1,9 +1,9 @@
-// NOTE: ES5 Patterns to create an object
-
 // NOTE: Factory functions -> used to create new objects
+// ES5 way to create an object
 // we return a object in factory functions.
 // eg-
 
+// NOTE: Encapsulation is achieved by binding properties and methods in one object.
 let circle = {
     radius: 2,
     location: {
@@ -34,15 +34,16 @@ circle2.draw();
 console.log(circle2.radius);
 console.log(circle2.location);
 
-// NOTE: constructor function
-// first letter in capital => PascalCase
-
-// we use new keyword to get a new instace of circle.
-// we will use this keyword here.
-// we use this method because it looks like class.
-
-// ES5 did not have class
-
+/* NOTE : 
+ * constructor function
+ * first letter in capital => PascalCase
+ * 
+ * we use new keyword to get a new instace of circle.
+ * we will use this keyword here.
+ * we use this method because it looks like class.
+ * 
+ * ES5 did not have class
+ * */
 function Circle(rad, xCor, yCor) {
     this.radius = rad;
     this.location = {
@@ -59,8 +60,8 @@ console.log(circle3.radius);
 console.log(circle3.location);
 circle3.draw();
 
-/* 
- * NOTE: Functions are Objects in JS
+/* NOTE : 
+ * Functions are Objects in JS
  * 
  * const func = new Function(...args, `func body`);
  * 
@@ -91,7 +92,7 @@ console.log(circle3.constructor);
 console.log(circle4.constructor);
 
 
-/* NOTE: 
+/* NOTE : 
  * Every object has a constructor property.
  * it references the function (constructor func) that was used to create that object.
  * 
@@ -127,16 +128,16 @@ console.log(circle4.constructor);
 const circle5 = Circle.call({}, 1, 2, 3);
 const circ = new Circle(1, 2, 3);
 
-const circle6 = Circle.apply({}, [1, 2, 3]);
+/* NOTE :
+* new keyword will internally create an empty object,
+* and pass it as 1st arg to .call() method of Circle function.
+*
+* the object (that we pass to call() method,
+* it will determine the context for 'this' for the object that we are creating (circle5, circle6... etc.)
+*
+*/
 
-/* NOTE:
- * new keyword will internally create an empty object,
- * and pass it as 1st arg to .call() method of Circle function.
- *
- * the object (that we pass to call() method,
- * it will determine the context for 'this' for the object that we are creating (circle5, circle6... etc.)
- *
- */
+const circle6 = Circle.apply({}, [1, 2, 3]);
 
 /* NOTE :
  * only difference between .call() and .apply() method is -

@@ -73,5 +73,3 @@ console.log(circle.getDefaultLocation());
 console.log(circle.currLocation);
 circle.currLocation = { x: 3, y: 3 };
 console.log(circle.currLocation);  
-
-Object.method()

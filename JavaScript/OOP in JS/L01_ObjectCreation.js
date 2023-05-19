@@ -16,6 +16,7 @@ let circle = {
 }
 // but we cannot do this object literal declaration again and again!
 
+// Factory function
 const circleFactory = (r, x, y) => {
     return {
         radius: r,

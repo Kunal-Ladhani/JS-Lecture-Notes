@@ -1,10 +1,9 @@
-// NOTE: Encapsulation is achieved by binding properties and methods in one object.
-
 /* 
- * NOTE: ABSTRACTION -
+ * NOTE: 
+ * ABSTRACTION
  * we need to show only the essentials.
  * not the impl details of the object.
- */
+ * */
 
 
 function Circle(rad, xCor, yCor) {

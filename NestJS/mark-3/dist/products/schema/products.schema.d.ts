@@ -33,9 +33,9 @@ export declare class Product {
     createdAt: Date;
     deletedAt?: Date;
 }
-export declare const ProductSchema: import("mongoose").Schema<Product, import("mongoose").Model<Product, any, any, any, import("mongoose").Document<unknown, any, Product> & Omit<Product & {
+export declare const ProductSchema: import("mongoose").Schema<Product, import("mongoose").Model<Product, any, any, any, import("mongoose").Document<unknown, any, Product> & Product & {
     _id: import("mongoose").Types.ObjectId;
-}, never>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Product, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Product>> & Omit<import("mongoose").FlatRecord<Product> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Product, import("mongoose").Document<unknown, {}, Product> & Product & {
     _id: import("mongoose").Types.ObjectId;
-}, never>>;
+}>;
 export type ProductDocument = Product & Document;

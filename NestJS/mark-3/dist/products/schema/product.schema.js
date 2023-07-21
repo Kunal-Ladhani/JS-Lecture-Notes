@@ -28,32 +28,32 @@ const mongoose = __importStar(require("mongoose"));
 const schema = mongoose.Schema;
 const types = schema.Types;
 const ProdSchema = new schema({
-    id: {
-        type: types.ObjectId,
-        required: true
-    },
     title: {
-        type: types.String,
+        type: String,
         required: true
     },
     description: {
-        type: types.String
+        type: String
     },
     price: {
-        type: types.Number
+        type: Number
     },
     category: {
-        type: category_enum_1.Category
+        type: category_enum_1.Category,
+        enum: Object.keys(category_enum_1.Category),
+        default: category_enum_1.Category.OTHERS
     },
     completedAt: {
-        type: types.Date
+        type: Date
     },
     createdAt: {
-        type: types.Date
+        type: Date
     },
     deletedAt: {
         type: types.Date
     }
 });
+ProdSchema.methods.getProductsInPriceRange = (start, end) => {
+};
 module.exports = mongoose.model('Product', ProdSchema);
 //# sourceMappingURL=product.schema.js.map

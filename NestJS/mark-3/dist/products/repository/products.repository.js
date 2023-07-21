@@ -22,17 +22,16 @@ let ProductRepository = class ProductRepository {
     constructor(productModel) {
         this.productModel = productModel;
     }
-    ;
     async findAllProducts() {
         return await this.productModel.find();
     }
     async findOneProduct(id) {
-        return await this.productModel.findById(id);
+        return await this.productModel.findOne({ _id: id });
     }
     async createProduct(createProductDto) {
         return await new this.productModel({
             ...createProductDto,
-            createdAt: new Date()
+            createdAt: new Date(),
         }).save();
     }
     async updateProduct(id, updateProductDto) {

@@ -1,16 +1,19 @@
-import { IsAlpha, IsNumber, IsString } from "class-validator";
-import { Category } from '../enums/category.enum';
+import { IsEnum, IsMongoId, IsNumber, IsString } from "class-validator";
+import { Category } from "../enums/category.enum";
 
 export class BaseProductDto {
-    @IsString()
-    title: string;
+  @IsMongoId()
+  id?: string;
 
-    @IsString()
-    description?: string;
+  @IsString()
+  title: string;
 
-    @IsNumber()
-    price: number;
+  @IsString()
+  description?: string;
 
-    @IsAlpha()
-    category: Category;
+  @IsNumber()
+  price: number;
+
+  @IsEnum(Category)
+  category: Category;
 }

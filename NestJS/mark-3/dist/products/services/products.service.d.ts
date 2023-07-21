@@ -33,8 +33,8 @@ export declare class ProductsService {
     findAllProducts(): Promise<Product[]>;
     findOneProduct(id: string): Promise<Product>;
     createProduct(createProductDto: CreateProductDto): Promise<Product>;
-    updateProduct(id: string, updateProductDto: UpdateProductDto): Promise<import("mongoose").Document<unknown, {}, Product> & Omit<Product & {
+    updateProduct(id: string, updateProductDto: UpdateProductDto): Promise<import("mongoose").Document<unknown, {}, Product> & Product & {
         _id: import("mongoose").Types.ObjectId;
-    }, never>>;
+    }>;
     deleteProduct(id: string): Promise<Product>;
 }

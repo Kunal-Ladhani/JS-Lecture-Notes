@@ -2,5 +2,6 @@ export declare enum Category {
     ELECTRONICS = "electronics",
     CLOTHING = "clothing",
     HOME_APPLIANCE = "home appliance",
-    FOOD = "food"
+    FOOD = "food",
+    OTHERS = "others"
 }

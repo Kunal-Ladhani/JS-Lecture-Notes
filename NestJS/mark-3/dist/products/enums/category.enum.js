@@ -7,6 +7,6 @@ var Category;
     Category["CLOTHING"] = "clothing";
     Category["HOME_APPLIANCE"] = "home appliance";
     Category["FOOD"] = "food";
+    Category["OTHERS"] = "others";
 })(Category = exports.Category || (exports.Category = {}));
-;
 //# sourceMappingURL=category.enum.js.map

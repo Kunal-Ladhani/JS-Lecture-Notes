@@ -13,11 +13,16 @@ exports.BaseProductDto = void 0;
 const class_validator_1 = require("class-validator");
 const category_enum_1 = require("../enums/category.enum");
 class BaseProductDto {
+    id;
     title;
     description;
     price;
     category;
 }
+__decorate([
+    (0, class_validator_1.IsMongoId)(),
+    __metadata("design:type", String)
+], BaseProductDto.prototype, "id", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -31,7 +36,7 @@ __decorate([
     __metadata("design:type", Number)
 ], BaseProductDto.prototype, "price", void 0);
 __decorate([
-    (0, class_validator_1.IsAlpha)(),
+    (0, class_validator_1.IsEnum)(category_enum_1.Category),
     __metadata("design:type", String)
 ], BaseProductDto.prototype, "category", void 0);
 exports.BaseProductDto = BaseProductDto;

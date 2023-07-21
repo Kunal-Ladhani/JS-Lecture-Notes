@@ -5,14 +5,14 @@ const schema = mongoose.Schema;
 const types = schema.Types;
 
 const ProdSchema = new schema({
-    id: {
-        type: types.ObjectId,
-        required: true,
-        unique: true,
-        sparse: true,   // null keys are ignored
-        default: 123,    // 24bit key
-        // enum: [...a]
-    },
+    // id: {
+    //     type: types.ObjectId,
+    //     required: true, these two are not req
+    //     unique: true, 
+    //     sparse: true,   // null keys are ignored
+    //     default: 123,    // 24bit key
+    //     enum: [...a]
+    // },
     title: {
         type: String,
         required: true
@@ -24,7 +24,9 @@ const ProdSchema = new schema({
         type: Number
     },
     category: {
-        type: Category
+        type: Category,
+        enum : Object.keys(Category),
+        default : Category.OTHERS
     },
     completedAt: {
         type: Date
@@ -37,14 +39,19 @@ const ProdSchema = new schema({
     }
 });
 
-ProdSchema.methods.getProductById = () => {
+ProdSchema.methods.getProductsInPriceRange = (start:number,end:number) => {
     // this is basically plugin
     // always used query. 
+    
 };
 
+// DEFINE MONGODB SCHEMA ACCORDING TO mongoose - default manual defination.
 module.exports = mongoose.model('Product', ProdSchema);
 
-// DEFINE MONGODB SCHEMA ACCORDING TO mongoose - default manual defination.
+
+
+
+
 
 // DB pe store kar rahe hai Master Slave config - 1M 2S
 

@@ -20,7 +20,7 @@ import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import cors from "cors";
 
-import { connectDB } from "./util/database";
+import { connectDB } from "./common/utils/database";
 
 function setUpSwagger(app) {
   const config = new DocumentBuilder()
@@ -28,7 +28,7 @@ function setUpSwagger(app) {
     .setDescription("Product Microservice API description")
     .setVersion("1.0")
     .addBearerAuth()
-    // .addServer('http://localhost:3001/sa-uk-cs', 'dev')
+    // .addServer('http://localhost:3001/product', 'dev')
     .addServer(app.get(ConfigService).get("server.url"), "uat")
     .build();
 
@@ -73,7 +73,7 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ extended: false }));
 
   // connect to db.
-  // await connectDB();
+  await connectDB();
 
   // PORT and HOSTNAME Configuration
   config({ path: `config.env` });

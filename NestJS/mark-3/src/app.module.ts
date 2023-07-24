@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductModule } from './products/products.module';
+import { ProductModule } from './modules/products/products.module';
 import { ConfigModule } from '@nestjs/config';
 import { config } from 'dotenv';
 

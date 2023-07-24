@@ -1,6 +1,6 @@
-import { Connection, Schema } from 'mongoose';
+import { Connection, Schema } from "mongoose";
 
-import { ICustomerDocument, ICustomerModel } from '../../interface';
+import { ICustomerDocument, ICustomerModel } from "../../interface";
 import {
   MARITAL_STATUS,
   SOURCE_OF_INCOME,
@@ -13,7 +13,7 @@ import {
   GENDER,
   RESIDENTIAL_STATUS,
   KYC_STATUS,
-} from '../constants';
+} from "../constants";
 
 const CustomerSchema = new Schema({
   appUserId: { type: String },
@@ -46,10 +46,13 @@ const CustomerSchema = new Schema({
   professionalDetails: {
     incomeRange: { type: String, enum: Object.keys(INCOME_RANGE) },
     employmentType: { type: String, enum: Object.keys(EMPLOYMENT_TYPE) },
-    employmentIndustry: { type: String, enum: Object.keys(EMPLOYMENT_INDUSTRY) },
+    employmentIndustry: {
+      type: String,
+      enum: Object.keys(EMPLOYMENT_INDUSTRY),
+    },
     sourceOfIncome: { type: String, enum: Object.keys(SOURCE_OF_INCOME) },
   },
-  language: { type: String, enum: Object.keys(LANGUAGE), default: 'EN' },
+  language: { type: String, enum: Object.keys(LANGUAGE), default: "EN" },
   residentialStatus: { type: String, enum: Object.keys(RESIDENTIAL_STATUS) },
   onboardingLocation: {
     long: Number,
@@ -84,7 +87,11 @@ const CustomerSchema = new Schema({
       dateOfBirth: String,
     },
   ],
-  status: { type: String, enum: Object.keys(STATUS), default: STATUS.CUSTOMER_REGISTERED_SUCCESSFULLY },
+  status: {
+    type: String,
+    enum: Object.keys(STATUS),
+    default: STATUS.CUSTOMER_REGISTERED_SUCCESSFULLY,
+  },
   bankCustomerId: { type: String },
   accountNumber: { type: String },
   ifscCode: { type: String },
@@ -100,10 +107,16 @@ const CustomerSchema = new Schema({
   updatedAt: { type: Number, default: Date.now() },
 });
 
-CustomerSchema.pre(['updateOne', 'updateMany'], function (next) {
+CustomerSchema.pre(["updateOne", "updateMany"], function (next) {
   this.set({ updatedAt: Date.now() });
   next();
 });
 
-export const CustomerModelFn: (conn: Connection) => ICustomerModel = (conn: Connection) =>
-  conn.model<ICustomerDocument, ICustomerModel>('Customer', CustomerSchema, 'customer');
+export const CustomerModelFn: (conn: Connection) => ICustomerModel = (
+  conn: Connection
+) =>
+  conn.model<ICustomerDocument, ICustomerModel>(
+    "Customer",
+    CustomerSchema,
+    "customer"
+  );

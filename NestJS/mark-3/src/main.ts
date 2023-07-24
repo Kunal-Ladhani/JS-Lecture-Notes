@@ -45,7 +45,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   setUpSwagger(app);
 
-  const loggerInstance = app.get(Logger);
+  // Setup for logger
+  // const loggerInstance = app.get(Logger);
   // app.useGlobalFilters(new HttpExceptionFilter(loggerInstance));
 
   app.useGlobalPipes(

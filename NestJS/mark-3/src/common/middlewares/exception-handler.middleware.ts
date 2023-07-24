@@ -9,7 +9,7 @@ import {
 
 import { DEFAULT_EXCEPTION_SOURCE } from "../constants";
 import { logger } from "../utils";
-import { IException } from "../../interfaces";
+import { IException } from "../../interface";
 
 @Catch()
 export class HttpExceptionFilter extends BaseExceptionFilter {

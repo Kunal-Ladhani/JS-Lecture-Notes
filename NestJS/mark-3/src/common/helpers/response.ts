@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { KYC_STATUS, STATUS } from "../common/constants";
+import { KYC_STATUS, STATUS } from "../constants";
 import { ICheckVkycStatusRes } from "src/interface";
 
 export const REGISTER_CUSTOMER_RES = {

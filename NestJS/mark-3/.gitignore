@@ -50,4 +50,4 @@ TEST*.xml
 *.wmv
 
 # Enviroment file
-.env
+*.env

@@ -1,14 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { ValidationPipe } from "@nestjs/common";
-
-// 3rd party dependencies
-import morgan from "morgan";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import { config } from "dotenv";
-import cors from "cors";
-import { connectDB } from "./util/database";
+import {
+  Logger,
+  LogLevel,
+  LoggerService,
+  ValidationPipe,
+} from "@nestjs/common";
 import {
   DocumentBuilder,
   SwaggerDocumentOptions,
@@ -16,10 +13,19 @@ import {
 } from "@nestjs/swagger";
 import { ConfigService } from "@nestjs/config";
 
+// 3rd party dependencies
+import morgan from "morgan";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+import cors from "cors";
+
+import { connectDB } from "./util/database";
+
 function setUpSwagger(app) {
   const config = new DocumentBuilder()
-    .setTitle("Utkarsh Customer Service")
-    .setDescription("Utkarsh-Customer-Onboarding service API description")
+    .setTitle("Product Microservice")
+    .setDescription("Product Microservice API description")
     .setVersion("1.0")
     .addBearerAuth()
     // .addServer('http://localhost:3001/sa-uk-cs', 'dev')
@@ -39,24 +45,25 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   setUpSwagger(app);
 
-  app.useGlobalPipes(new ValidationPipe());
-  // app.useGlobalFilters()
+  const loggerInstance = app.get(Logger);
+  // app.useGlobalFilters(new HttpExceptionFilter(loggerInstance));
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: false,
+      forbidNonWhitelisted: true,
+      whitelist: true,
+    })
+  );
 
   // enable ALL cors requests
   app.use(cors());
 
   // for using config services
-  const configService = app.get(ConfigService);
-
-  // PORT and HOSTNAME Configuration
-  config({ path: `config.env` });
-  const PORT = process.env.PORT || 8080;
-  const HOSTNAME = process.env.HOSTNAME || `localhost`;
+  // const configService = app.get(ConfigService);
 
   // LOG REQUESTS
   app.use(morgan("tiny"));
-
-  
 
   app.use(cookieParser());
 
@@ -67,6 +74,11 @@ async function bootstrap() {
 
   // connect to db.
   // await connectDB();
+
+  // PORT and HOSTNAME Configuration
+  config({ path: `config.env` });
+  const PORT = process.env.PORT || 8080;
+  const HOSTNAME = process.env.HOSTNAME || `localhost`;
 
   // setting up server.
   await app.listen(PORT, HOSTNAME, () => {

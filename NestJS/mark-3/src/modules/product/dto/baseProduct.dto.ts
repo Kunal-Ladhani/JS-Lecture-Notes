@@ -1,5 +1,5 @@
 import { IsEnum, IsMongoId, IsNumber, IsString } from "class-validator";
-import { Category } from "../enums/category.enum";
+import { Category } from "../enum/category.enum";
 
 export class BaseProductDto {
   @IsMongoId()

@@ -1,2 +1,1 @@
-export * from './customer-model.interface';
-export * from './kyc-details-model.interface';
+export * from "./customer-model.interface";

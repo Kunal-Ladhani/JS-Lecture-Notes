@@ -1,12 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import {
-  Logger,
-  LogLevel,
-  LoggerService,
-  ValidationPipe,
-} from "@nestjs/common";
-import {
   DocumentBuilder,
   SwaggerDocumentOptions,
   SwaggerModule,
@@ -19,8 +13,6 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import cors from "cors";
-
-import { connectDB } from "./common/utils/database";
 
 function setUpSwagger(app) {
   const config = new DocumentBuilder()
@@ -49,14 +41,6 @@ async function bootstrap() {
   // const loggerInstance = app.get(Logger);
   // app.useGlobalFilters(new HttpExceptionFilter(loggerInstance));
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      disableErrorMessages: false,
-      forbidNonWhitelisted: true,
-      whitelist: true,
-    })
-  );
-
   // enable ALL cors requests
   app.use(cors());
 
@@ -74,7 +58,7 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ extended: false }));
 
   // connect to db.
-  await connectDB();
+  // await connectDB();
 
   // PORT and HOSTNAME Configuration
   config({ path: `config.env` });

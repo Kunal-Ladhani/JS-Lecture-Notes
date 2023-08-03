@@ -4,16 +4,14 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Post,
   Put,
   Req,
   Res,
-  UsePipes,
 } from "@nestjs/common";
-import { CreateProductDto } from "../dtos/createProduct.dto";
-import { UpdateProductDto } from "../dtos/updateProduct.dto";
-import { ProductsService } from "../services/products.service";
+import { CreateProductDto } from "../dto/createProduct.dto";
+import { UpdateProductDto } from "../dto/updateProduct.dto";
+import { ProductsService } from "../service/products.service";
 import { ObjectIdValidator } from "src/pipes/ObjectIdValidator.pipe";
 
 @Controller("/products")
@@ -37,7 +35,7 @@ export class ProductsController {
 
   @Put("/:id")
   private async updateProduct(
-    @Param("id",ObjectIdValidator) id: string,
+    @Param("id", ObjectIdValidator) id: string,
     @Body() updateProductDto: UpdateProductDto
   ) {
     return await this.productService.updateProduct(id, updateProductDto);

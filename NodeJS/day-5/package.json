@@ -1,0 +1,21 @@
+{
+  "name": "day-5",
+  "version": "1.0.0",
+  "description": "learn about cron jobs and setup a cron job in node using shelljs and node-cron modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-cron",
+    "cron",
+    "cronjs",
+    "cron-jobs"
+  ],
+  "author": "kunal ladhani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-cron": "^3.0.3"
+  }
+}

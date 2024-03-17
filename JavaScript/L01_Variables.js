@@ -1,5 +1,5 @@
 // declare and initialize a variable at same time
-// called defining a varable
+// called defining a variable
 var x = 5;
 console.log(x);
 

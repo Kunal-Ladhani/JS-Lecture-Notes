@@ -68,7 +68,7 @@ app.listen(4000);
 /* IMPORTANT: 
 
     Express.js is a Node.js framework 
-    - a unopiniated (has no rigid architechtural style)
+    - a unopnionated (has no rigid architectural style)
     - minimalistic framework
 
     - its a package that adds a bunch of extra utility functions and tools to Node.js

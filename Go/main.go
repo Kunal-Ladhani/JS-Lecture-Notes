@@ -74,4 +74,6 @@ func main() {
 	var num2 = 101       // automatic type inference
 	num3 := 102          // automatic type inference - you need to assign a value here
 	fmt.Print(num1, num2, num3, "\n")
+
+	fmt.Println("mod op => -40 % 7 = ", (-40 % 7))
 }

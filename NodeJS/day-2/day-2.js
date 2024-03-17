@@ -52,7 +52,7 @@ console.log(hello);
 // => import sum from "./sum";
 // => export { sum }
 
-// but you will have to change cofig inside package.json
+// but you will have to change config inside package.json
 // to generate it we need to create new node project
 // npm init
 // will ask basics and you can now have package.json config file.

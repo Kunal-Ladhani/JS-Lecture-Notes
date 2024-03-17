@@ -6,18 +6,18 @@
 // event driven
 // concurrent
 // multi paradigm - OOP, FP
-// TODO: READ ON NODE JS ARCHITECHTURE
+// TODO: READ ON NODE JS ARCHITECTURE
 
 // helps us write server side code
-// the transpiter had V8 engine embededed in it (written in C++)
-// transpiles the JS code to machine code that can run on machine.
+// the transpiler had V8 engine embedded in it (written in C++)
+// transpires the JS code to machine code that can run on machine.
 
 // TODO: LEARN COMPILER, TRANSPILER, INTERPRETER, PARSER
 
 // REPL - read eval print loop
 // we can write js code here and it will run on node.
 // can theoretically write long programs in it
-// but its not convienent so we have other way.
+// but its not convenient so we have other way.
 
 // we write the code in .js or .ts files and run it using node file_name.js 
 

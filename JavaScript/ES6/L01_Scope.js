@@ -1,17 +1,26 @@
 console.log("------------------------NO KEYWORD------------------------------");
 
+// console.log(undeclared); // reference error - x is not defined
 // console.log(x);  // reference error - x is not defined
 x = 50;
 console.log(x);
+
+undeclared = "kunal works at niyo";
+console.log(undeclared);
+{
+    undeclared = 550;
+    console.log(undeclared);
+}
+console.log(undeclared);
 
 console.log("------------------------VAR KEYWORD------------------------------");
 
 // var -> global or functional scope
 // var -> globally declared -> global scope
-// var -> locally declared -> local scope
-// var -> can be redeclared
-// var -> can be updated
-// var -> can be used before declaration - undefined
+// var -> locally declared -> local scope / functional scope
+// var -> can be re-declared with same or another datatype 
+// var -> can be updated - reassigned to same or another datatype
+// var -> can be used before declaration - undefined - hoisted to top of execution context
 
 console.log(a); // undefined
 var a = 10;

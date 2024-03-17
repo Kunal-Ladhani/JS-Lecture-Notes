@@ -17,8 +17,8 @@
 import http from 'http';
 import fs from 'fs';
 
-// event driven architechture of node.js 
-// if x happends do y
+// event driven architecture of node.js 
+// if x happens do y
 // if request comes, execute this anonymous callback (callback function).
 
 http.createServer((myHttpReq, myHttpRes) => {
@@ -26,7 +26,7 @@ http.createServer((myHttpReq, myHttpRes) => {
 });
 
 // we have created a server but did not use it! (catch it in a variable)
-// we dont know where is the server?
+// we don't know where is the server?
 // how to reach it?
 // what address does it have?
 
@@ -41,7 +41,7 @@ const mySimpleServer = http.createServer((myHttpReq, myHttpRes) => {
     // url on which the request was sent
 
     console.log(myHttpReq.method);
-    // method of the request - GET/ PUT / POST / PATCH / DELETE
+    // method of the request - GET/ PUT / POST / PATCH / DELETE unopnionated
 });
 
 const myFirstServer = http.createServer((myHttpReq, myHttpRes) => {
@@ -75,7 +75,7 @@ const requestHandler = (myHttpReq, myHttpRes) => {
         myHttpRes.write("<title>Server Home</title>");
         myHttpRes.write("</head>");
         myHttpRes.write("<body>");
-        myHttpRes.write("<h1>Welocome</h1>");
+        myHttpRes.write("<h1>Welcome</h1>");
         myHttpRes.write(`
         <form action="/message" method="POST" >
             <input type="text" name="message" placeholder="send message from here">
@@ -108,7 +108,7 @@ const requestHandler = (myHttpReq, myHttpRes) => {
             });
             // callback function is registered by nodejs
             // once the execution is complete it calls that
-            // this is event driven architechture of node
+            // this is event driven architecture of node
             // allows for non blocking i/o
 
         });

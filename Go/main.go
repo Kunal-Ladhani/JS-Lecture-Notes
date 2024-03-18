@@ -1,6 +1,6 @@
 package main
 
-// all go files should belong to a package. this one recides in main package
+// all go files should belong to a package. this one resides in main package
 
 // import the packages that you need - here we are importing fmt - for formatted I/O
 import (

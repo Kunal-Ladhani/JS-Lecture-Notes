@@ -6,6 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const hostname = "localhost";
 
+console.log(app.path());
+
 app.use(bodyParser.json());
 
 app.use('/', (req, res, next) => {
@@ -25,6 +27,7 @@ app.post('/name/:name', (req, res, next) => {
 })
 
 app.listen(PORT, hostname, () => {
+
     console.log('Listening on PORT = ' + PORT);
     console.log(`URL = http://${hostname}:${PORT}`);
 });

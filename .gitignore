@@ -16,11 +16,11 @@ lerna-debug.log*
 .DS_Store
 
 # Tests
-/coverage
-/.nyc_output
+**/coverage
+**/.nyc_output
 
 # IDEs and editors
-/.idea
+**/.idea
 .project
 .classpath
 .c9/
@@ -29,4 +29,4 @@ lerna-debug.log*
 *.sublime-workspace
 
 # IDE - VSCode
-/.vscode
+.vscode

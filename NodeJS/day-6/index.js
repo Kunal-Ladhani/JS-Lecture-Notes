@@ -4,7 +4,7 @@ import multer from 'multer';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const hostname = "localhost";
+const hostname = '127.0.0.1';
 
 console.log(app.path());
 
@@ -23,11 +23,9 @@ app.post('/name/:name', (req, res, next) => {
     console.log(req.params);
     res.json({ name: param }).status(200);
     res.send();
-    next();
 })
 
 app.listen(PORT, hostname, () => {
-
     console.log('Listening on PORT = ' + PORT);
     console.log(`URL = http://${hostname}:${PORT}`);
 });

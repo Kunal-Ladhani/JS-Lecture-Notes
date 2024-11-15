@@ -35,4 +35,4 @@ router.post('/add-product', (req, res, next) => {
     res.redirect("/user/shop");
 });
 
-module.exports = router;
+module.exports = router; 

@@ -15,5 +15,6 @@ app.get(`/hello`, (req, res) => {
 
 
 app.listen(port, () => {
+    debugger;
     console.log(`Server started on port number: ${port}`);
 });

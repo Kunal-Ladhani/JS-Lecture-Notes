@@ -1,14 +1,17 @@
 {
   "name": "weatherapp",
+  "type": "module",
   "version": "1.0.0",
   "description": "weather app api",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node app.js"
   },
   "author": "kunal ladhani",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "zod": "^3.23.8"
   }
 }
